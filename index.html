@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Student Intelligence</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f7fc;
+    color:#222;
+}
+
+/* LOGIN */
+.login-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+}
+
+.login-box{
+    width:380px;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    text-align:center;
+}
+
+.login-box h1{
+    color:#0d47a1;
+    margin-bottom:8px;
+}
+
+.login-box p{
+    color:#777;
+    margin-bottom:25px;
+}
+
+.login-box input{
+    width:100%;
+    padding:13px;
+    margin:8px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+.login-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#1565c0;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.login-btn:hover{
+    background:#0d47a1;
+}
+
+/* MAIN APP */
+#app{
+    display:none;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#0d47a1;
+    color:white;
+    padding:20px;
+    overflow-y:auto;
+}
+
+.logo{
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+
+.sidebar button{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:white;
+    text-align:left;
+    padding:13px;
+    margin:4px 0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.sidebar button:hover{
+    background:#1976d2;
+}
+
+.logout{
+    margin-top:20px !important;
+    background:#c62828 !important;
+}
+
+.main{
+    margin-left:250px;
+}
+
+.header{
+    height:70px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.header h2{
+    color:#0d47a1;
+}
+
+.user{
+    font-weight:bold;
+}
+
+.content{
+    padding:30px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* DASHBOARD */
+.welcome{
+    background:linear-gradient(135deg,#1565c0,#42a5f5);
+    color:white;
+    padding:25px;
+    border-radius:15px;
+    margin-bottom:25px;
+}
+
+.welcome h1{
+    margin-bottom:8px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat{
+    background:white;
+    padding:22px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.stat h3{
+    color:#1565c0;
+    font-size:28px;
+}
+
+.stat p{
+    color:#777;
+}
+
+/* MODULES */
+.section-title{
+    margin:20px 0;
+    color:#0d47a1;
+}
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.module-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+    cursor:pointer;
+    transition:.3s;
+    border-left:6px solid #1976d2;
+}
+
+.module-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.module-icon{
+    font-size:40px;
+    margin-bottom:12px;
+}
+
+.module-card h3{
+    color:#0d47a1;
+    margin-bottom:8px;
+}
+
+.module-card p{
+    color:#777;
+}
+
+/* SUB MODULE */
+.sub-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.sub-card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.sub-card:hover{
+    background:#e3f2fd;
+    transform:translateY(-4px);
+}
+
+.sub-card h3{
+    color:#1565c0;
+    margin-bottom:8px;
+}
+
+.back-btn{
+    padding:10px 18px;
+    border:none;
+    background:#1565c0;
+    color:white;
+    border-radius:7px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+/* DETAIL */
+.detail-box{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.1);
+}
+
+.detail-box h2{
+    color:#0d47a1;
+    margin-bottom:20px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.info{
+    background:#f4f7fc;
+    padding:18px;
+    border-radius:8px;
+}
+
+.info b{
+    color:#1565c0;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#1565c0;
+    color:white;
+    padding:14px;
+}
+
+td{
+    padding:13px;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f4f8ff;
+}
+
+/* NOTIFICATION */
+.notification{
+    background:white;
+    padding:20px;
+    margin:10px 0;
+    border-left:5px solid #1976d2;
+    border-radius:8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+/* FORM */
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    max-width:600px;
+}
+
+.form-box input,
+.form-box textarea,
+.form-box select{
+    width:100%;
+    padding:12px;
+    margin:8px 0 15px;
+    border:1px solid #ddd;
+    border-radius:7px;
+}
+
+.form-box button{
+    padding:12px 25px;
+    border:none;
+    border-radius:7px;
+    background:#1565c0;
+    color:white;
+    cursor:pointer;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .stats,
+    .module-grid,
+    .sub-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px){
+    .sidebar{
+        width:200px;
+    }
+
+    .main{
+        margin-left:200px;
+    }
+
+    .stats,
+    .module-grid,
+    .sub-grid,
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<div class="login-page" id="loginPage">
+
+    <div class="login-box">
+
+        <h1>🎓 Smart Student</h1>
+        <h1>Intelligence</h1>
+
+        <p>Student Management System</p>
+
+        <input type="text" id="username"
+               placeholder="Enter Username">
+
+        <input type="password" id="password"
+               placeholder="Enter Password">
+
+        <button class="login-btn" onclick="login()">
+            Login
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            🎓 SMART STUDENT<br>
+            INTELLIGENCE
+        </div>
+
+        <button onclick="openPage('dashboard')">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="openPage('student')">
+            👩🏻‍🎓 Student Management
+        </button>
+
+        <button onclick="openPage('academic')">
+            📚 Academic
+        </button>
+
+        <button onclick="openPage('library')">
+            📖 Library
+        </button>
+
+        <button onclick="openPage('ai')">
+            🤖 AI Intelligence
+        </button>
+
+        <button onclick="openPage('campus')">
+            🏫 Campus Services
+        </button>
+
+        <button onclick="openPage('notifications')">
+            🔔 Notifications
+        </button>
+
+        <button onclick="openPage('settings')">
+            ⚙️ Settings
+        </button>
+
+        <button class="logout" onclick="logout()">
+            🚪 Logout
+        </button>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="header">
+
+            <h2>Smart Student Intelligence</h2>
+
+            <div class="user">
+                👩🏻‍🎓 Dharshini C
+            </div>
+
+        </div>
+
+
+        <div class="content">
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboard" class="page active">
+
+    <div class="welcome">
+
+        <h1>Welcome, Dharshini C 👋</h1>
+
+        <p>
+            Manage your academic activities with
+            Smart Student Intelligence.
+        </p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>85%</h3>
+            <p>Attendance</p>
+        </div>
+
+        <div class="stat">
+            <h3>78%</h3>
+            <p>Average Marks</p>
+        </div>
+
+        <div class="stat">
+            <h3>8.2</h3>
+            <p>GPA</p>
+        </div>
+
+        <div class="stat">
+            <h3>12</h3>
+            <p>Books</p>
+        </div>
+
+    </div>
+
+
+    <h2 class="section-title">
+        Smart Student Modules
+    </h2>
+
+
+    <div class="module-grid">
+
+        <div class="module-card"
+             onclick="openPage('student')">
+
+            <div class="module-icon">👩🏻‍🎓</div>
+
+            <h3>Student Management</h3>
+
+            <p>
+                Profile, Attendance and Marks
+            </p>
+
+        </div>
+
+
+        <div class="module-card"
+             onclick="openPage('academic')">
+
+            <div class="module-icon">📚</div>
+
+            <h3>Academic</h3>
+
+            <p>
+                Subjects, Timetable and Exams
+            </p>
+
+        </div>
+
+
+        <div class="module-card"
+             onclick="openPage('library')">
+
+            <div class="module-icon">📖</div>
+
+            <h3>Library</h3>
+
+            <p>
+                Search and manage books
+            </p>
+
+        </div>
+
+
+        <div class="module-card"
+             onclick="openPage('ai')">
+
+            <div class="module-icon">🤖</div>
+
+            <h3>AI Intelligence</h3>
+
+            <p>
+                Career, Learning and Performance
+            </p>
+
+        </div>
+
+
+        <div class="module-card"
+             onclick="openPage('campus')">
+
+            <div class="module-icon">🏫</div>
+
+            <h3>Campus Services</h3>
+
+            <p>
+                Events and Complaints
+            </p>
+
+        </div>
+
+
+        <div class="module-card"
+             onclick="openPage('notifications')">
+
+            <div class="module-icon">🔔</div>
+
+            <h3>Notifications</h3>
+
+            <p>
+                View latest notifications
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STUDENT MANAGEMENT ================= -->
+
+<section id="student" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('dashboard')">
+        ← Back
+    </button>
+
+    <h2 class="section-title">
+        👩🏻‍🎓 Student Management
+    </h2>
+
+    <div class="sub-grid">
+
+        <div class="sub-card"
+             onclick="openPage('profile')">
+
+            <h3>👤 Student Profile</h3>
+
+            <p>
+                View student personal details
+            </p>
+
+        </div>
+
+
+        <div class="sub-card"
+             onclick="openPage('attendance')">
+
+            <h3>📅 Attendance</h3>
+
+            <p>
+                View attendance details
+            </p>
+
+        </div>
+
+
+        <div class="sub-card"
+             onclick="openPage('marks')">
+
+            <h3>📊 Marks & GPA</h3>
+
+            <p>
+                View marks and GPA
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('student')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>👤 Student Profile</h2>
+
+        <div class="info-grid">
+
+            <div class="info">
+                <b>Name:</b><br>
+                Dharshini C
+            </div>
+
+            <div class="info">
+                <b>Student ID:</b><br>
+                SSI2026001
+            </div>
+
+            <div class="info">
+                <b>Department:</b><br>
+                BCA
+            </div>
+
+            <div class="info">
+                <b>Year:</b><br>
+                III Year
+            </div>
+
+            <div class="info">
+                <b>Email:</b><br>
+                dharshini@example.com
+            </div>
+
+            <div class="info">
+                <b>Phone:</b><br>
+                9876543210
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ATTENDANCE ================= -->
+
+<section id="attendance" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('student')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📅 Attendance</h2>
+
+        <table>
+
+            <tr>
+                <th>Subject</th>
+                <th>Total Classes</th>
+                <th>Present</th>
+                <th>Percentage</th>
+            </tr>
+
+            <tr>
+                <td>Java</td>
+                <td>50</td>
+                <td>45</td>
+                <td>90%</td>
+            </tr>
+
+            <tr>
+                <td>DBMS</td>
+                <td>50</td>
+                <td>42</td>
+                <td>84%</td>
+            </tr>
+
+            <tr>
+                <td>Operating System</td>
+                <td>50</td>
+                <td>40</td>
+                <td>80%</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MARKS ================= -->
+
+<section id="marks" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('student')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📊 Marks & GPA</h2>
+
+        <table>
+
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Grade</th>
+            </tr>
+
+            <tr>
+                <td>Java</td>
+                <td>85</td>
+                <td>A</td>
+            </tr>
+
+            <tr>
+                <td>DBMS</td>
+                <td>78</td>
+                <td>B+</td>
+            </tr>
+
+            <tr>
+                <td>Operating System</td>
+                <td>82</td>
+                <td>A</td>
+            </tr>
+
+        </table>
+
+        <br>
+
+        <h3>Overall GPA: 8.2</h3>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ACADEMIC ================= -->
+
+<section id="academic" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('dashboard')">
+        ← Back
+    </button>
+
+    <h2 class="section-title">
+        📚 Academic
+    </h2>
+
+    <div class="sub-grid">
+
+        <div class="sub-card"
+             onclick="openPage('subjects')">
+
+            <h3>📘 Subjects</h3>
+            <p>View current subjects</p>
+
+        </div>
+
+        <div class="sub-card"
+             onclick="openPage('timetable')">
+
+            <h3>🕐 Timetable</h3>
+            <p>View class timetable</p>
+
+        </div>
+
+        <div class="sub-card"
+             onclick="openPage('exam')">
+
+            <h3>📝 Exam Schedule</h3>
+            <p>View examination dates</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUBJECTS -->
+
+<section id="subjects" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('academic')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📘 Subjects</h2>
+
+        <ul>
+            <li>Java Programming</li><br>
+            <li>Database Management System</li><br>
+            <li>Operating System</li><br>
+            <li>Artificial Intelligence</li><br>
+            <li>Web Technology</li>
+        </ul>
+
+    </div>
+
+</section>
+
+
+<!-- TIMETABLE -->
+
+<section id="timetable" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('academic')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>🕐 Timetable</h2>
+
+        <table>
+
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+            </tr>
+
+            <tr>
+                <td>9:00 - 10:00</td>
+                <td>Java</td>
+                <td>DBMS</td>
+                <td>AI</td>
+            </tr>
+
+            <tr>
+                <td>10:00 - 11:00</td>
+                <td>OS</td>
+                <td>Java</td>
+                <td>Web Tech</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- EXAM -->
+
+<section id="exam" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('academic')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📝 Exam Schedule</h2>
+
+        <table>
+
+            <tr>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Time</th>
+            </tr>
+
+            <tr>
+                <td>Java</td>
+                <td>10-10-2026</td>
+                <td>10:00 AM</td>
+            </tr>
+
+            <tr>
+                <td>DBMS</td>
+                <td>13-10-2026</td>
+                <td>10:00 AM</td>
+            </tr>
+
+            <tr>
+                <td>AI</td>
+                <td>16-10-2026</td>
+                <td>10:00 AM</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LIBRARY ================= -->
+
+<section id="library" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('dashboard')">
+        ← Back
+    </button>
+
+    <h2 class="section-title">
+        📖 Library
+    </h2>
+
+    <div class="sub-grid">
+
+        <div class="sub-card"
+             onclick="openPage('searchBooks')">
+
+            <h3>🔍 Search Books</h3>
+            <p>Search available books</p>
+
+        </div>
+
+        <div class="sub-card"
+             onclick="openPage('borrowedBooks')">
+
+            <h3>📚 Borrowed Books</h3>
+            <p>View borrowed books</p>
+
+        </div>
+
+        <div class="sub-card"
+             onclick="openPage('returnBook')">
+
+            <h3>↩️ Return Book</h3>
+            <p>Return library books</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SEARCH BOOK -->
+
+<section id="searchBooks" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('library')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>🔍 Search Books</h2>
+
+        <input type="text"
+               placeholder="Search book name..."
+               style="padding:12px;width:100%;border:1px solid #ddd;border-radius:7px;">
+
+        <br><br>
+
+        <table>
+
+            <tr>
+                <th>Book</th>
+                <th>Author</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>Java Programming</td>
+                <td>Herbert Schildt</td>
+                <td>Available</td>
+            </tr>
+
+            <tr>
+                <td>Database Systems</td>
+                <td>Raghu Ramakrishnan</td>
+                <td>Available</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- BORROWED -->
+
+<section id="borrowedBooks" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('library')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📚 Borrowed Books</h2>
+
+        <table>
+
+            <tr>
+                <th>Book</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+            </tr>
+
+            <tr>
+                <td>Java Programming</td>
+                <td>01-09-2026</td>
+                <td>15-09-2026</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- RETURN -->
+
+<section id="returnBook" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('library')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>↩️ Return Book</h2>
+
+        <p>
+            Select the borrowed book and return it to the library.
+        </p>
+
+        <br>
+
+        <button class="login-btn"
+                onclick="alert('Book return request submitted!')">
+            Return Book
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AI ================= -->
+
+<section id="ai" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('dashboard')">
+        ← Back
+    </button>
+
+    <h2 class="section-title">
+        🤖 AI Intelligence
+    </h2>
+
+    <div class="sub-grid">
+
+        <div class="sub-card"
+             onclick="openPage('career')">
+
+            <h3>🎯 Career Recommendation</h3>
+
+            <p>
+                AI-based career suggestions
+            </p>
+
+        </div>
+
+
+        <div class="sub-card"
+             onclick="openPage('learning')">
+
+            <h3>📖 Learning Plan</h3>
+
+            <p>
+                Personalized learning plan
+            </p>
+
+        </div>
+
+
+        <div class="sub-card"
+             onclick="openPage('performance')">
+
+            <h3>📊 Performance Analysis</h3>
+
+            <p>
+                Analyze academic performance
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CAREER -->
+
+<section id="career" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('ai')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>🎯 Career Recommendation</h2>
+
+        <p>
+            Based on your academic interests and performance,
+            possible career areas can be explored here.
+        </p>
+
+        <br>
+
+        <div class="info">
+            <b>Suggested Area:</b><br>
+            Software Development
+        </div>
+
+        <br>
+
+        <div class="info">
+            <b>Skills to Develop:</b><br>
+            Java, Spring Boot, MySQL, HTML, CSS, JavaScript
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LEARNING -->
+
+<section id="learning" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('ai')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📖 Learning Plan</h2>
+
+        <div class="info-grid">
+
+            <div class="info">
+                <b>Week 1</b><br>
+                Java Programming
+            </div>
+
+            <div class="info">
+                <b>Week 2</b><br>
+                MySQL
+            </div>
+
+            <div class="info">
+                <b>Week 3</b><br>
+                Spring Boot
+            </div>
+
+            <div class="info">
+                <b>Week 4</b><br>
+                Web Development
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PERFORMANCE -->
+
+<section id="performance" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('ai')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>📊 Performance Analysis</h2>
+
+        <div class="info-grid">
+
+            <div class="info">
+                <b>Attendance</b><br>
+                85%
+            </div>
+
+            <div class="info">
+                <b>Average Marks</b><br>
+                78%
+            </div>
+
+            <div class="info">
+                <b>GPA</b><br>
+                8.2
+            </div>
+
+            <div class="info">
+                <b>Performance Status</b><br>
+                Good
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CAMPUS ================= -->
+
+<section id="campus" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('dashboard')">
+        ← Back
+    </button>
+
+    <h2 class="section-title">
+        🏫 Campus Services
+    </h2>
+
+    <div class="sub-grid">
+
+        <div class="sub-card"
+             onclick="openPage('events')">
+
+            <h3>🎉 College Events</h3>
+            <p>View upcoming college events</p>
+
+        </div>
+
+        <div class="sub-card"
+             onclick="openPage('complaint')">
+
+            <h3>📝 Complaint</h3>
+            <p>Submit a campus complaint</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- EVENTS -->
+
+<section id="events" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('campus')">
+        ← Back
+    </button>
+
+    <div class="detail-box">
+
+        <h2>🎉 College Events</h2>
+
+        <div class="notification">
+            <b>Sports Day</b><br>
+            College Sports Day - Coming Soon
+        </div>
+
+        <div class="notification">
+            <b>Project Expo</b><br>
+            Student Project Exhibition
+        </div>
+
+        <div class="notification">
+            <b>Cultural Event</b><br>
+            Annual Cultural Programme
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMPLAINT -->
+
+<section id="complaint" class="page">
+
+    <button class="back-btn"
+            onclick="openPage('campus')">
+        ← Back
+    </button>
+
+    <div class="form-box">
+
+        <h2>📝 Complaint</h2>
+
+        <input type="text"
+               id="complaintName"
+               placeholder="Your Name">
+
+        <input type="text"
+               id="complaintSubject"
+               placeholder="Complaint Subject">
+
+        <textarea id="complaintText"
+                  rows="5"
+                  placeholder="Enter your complaint"></textarea>
+
+        <button onclick="submitComplaint()">
+            Submit Complaint
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NOTIFICATIONS ================= -->
+
+<section id="notifications" class="page">
+
+    <h2 class="section-title">
+        🔔 Notifications
+    </h2>
+
+    <div class="notification">
+        📢 New Java assignment has been uploaded.
+    </div>
+
+    <div class="notification">
+        📢 Internal examination schedule updated.
+    </div>
+
+    <div class="notification">
+        📢 Library book return reminder.
+    </div>
+
+    <div class="notification">
+        📢 College event registration is open.
+    </div>
+
+</section>
+
+
+<!-- ================= SETTINGS ================= -->
+
+<section id="settings" class="page">
+
+    <h2 class="section-title">
+        ⚙️ Settings
+    </h2>
+
+    <div class="form-box">
+
+        <label>Student Name</label>
+
+        <input type="text"
+               value="Dharshini C">
+
+        <label>Email</label>
+
+        <input type="email"
+               value="dharshini@example.com">
+
+        <button onclick="alert('Settings saved!')">
+            Save Changes
+        </button>
+
+    </div>
+
+</section>
+
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+/* LOGIN */
+
+function login(){
+
+    let username =
+        document.getElementById("username").value;
+
+    let password =
+        document.getElementById("password").value;
+
+    if(username === "" || password === ""){
+
+        alert("Please enter username and password");
+
+        return;
+    }
+
+    document.getElementById("loginPage").style.display="none";
+
+    document.getElementById("app").style.display="block";
+
+}
+
+
+/* PAGE NAVIGATION */
+
+function openPage(pageId){
+
+    let pages =
+        document.querySelectorAll(".page");
+
+    pages.forEach(function(page){
+
+        page.classList.remove("active");
+
+    });
+
+    document.getElementById(pageId)
+            .classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    document.getElementById("app").style.display="none";
+
+    document.getElementById("loginPage").style.display="flex";
+
+    document.getElementById("username").value="";
+    document.getElementById("password").value="";
+
+}
+
+
+/* COMPLAINT */
+
+function submitComplaint(){
+
+    let name =
+        document.getElementById("complaintName").value;
+
+    let subject =
+        document.getElementById("complaintSubject").value;
+
+    let complaint =
+        document.getElementById("complaintText").value;
+
+    if(name === "" ||
+       subject === "" ||
+       complaint === ""){
+
+        alert("Please fill all fields");
+
+        return;
+    }
+
+    alert("Complaint submitted successfully!");
+
+    document.getElementById("complaintName").value="";
+    document.getElementById("complaintSubject").value="";
+    document.getElementById("complaintText").value="";
+
+}
+
+</script>
+
+</body>
+</html>
